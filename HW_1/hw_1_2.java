@@ -42,5 +42,6 @@ public class hw_1_2 {
         for (int i = 0; i < array_3.length; i++) {
            System.out.print (" " + array_3[i]);
         }
-        }
+        input.close();
     }
+}

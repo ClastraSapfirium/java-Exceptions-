@@ -30,7 +30,7 @@ import java.io.*;
 
 
 public class hw_1 {
-    private static String[] datephone = new String[4];
+    private static String[] datephone = new String[5];
     public static void main(String[] args) throws IOException {
         //переменная описывает вызываемое действие
         String act;
@@ -42,22 +42,27 @@ public class hw_1 {
 
         //вывод на екран описания возможных действий с указанием команд
         System.out.println("выбор действия: (add)добавить данные, (del)удалить данные," +
-                            " (save)сохранить, (show)показать данные, (exit)выход");
+                            " (show)показать данные, (exit)выход");
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         act = bf.readLine();
         while(!act.equals("exit")){
             //добавление записи
             if(act.equals("add")){
-                System.out.println("Введите фамилию, имя, отчество (фамилия, имя, отчество):");
-                String name = bf.readLine();
+                System.out.println("Ввод фамилии, имени, отчества.");
+                System.out.println("Введите фамилию:");
+                String first_name = bf.readLine();
+                System.out.println("Введите имя:");
+                String second_name = bf.readLine();
+                System.out.println("Введите отчество:");
+                String Third_name = bf.readLine();
                 System.out.println("Введите дату рождения (dd.mm.yyyy):");
                 String birthdate = bf.readLine();
                 System.out.println("Введите телефон:");
                 String phone = bf.readLine();
                 System.out.println("Введите пол (м/ж):");
                 String pol = bf.readLine();
-                adddatephone(name, birthdate, phone, pol);
+                adddatephone(first_name, second_name, Third_name, birthdate, phone, pol);
             }else{
                 //удаление записи
                 if(act.equals("del")){
@@ -66,28 +71,22 @@ public class hw_1 {
                     }
                 }else{
                     //поиск номеров по фамилии
-                    if(act.equals("save")){
-                        savedatephone();
-                    }
-                    else{
-                        if(act.equals("show")){
-                            Printbook();
-                        }
+                    if(act.equals("show")){
+                        Printbook();
                     }
                 }
             }
         //запрос на следующее действие
-        System.out.println("выбор действия: (add)добавить данные, (del)удалить данные, (save)сохранить, (show)показать данные, (exit)выход");
+        System.out.println("выбор действия: (add)добавить данные, (del)удалить данные, (show)показать данные, (exit)выход");
         act=bf.readLine();
         }
     }
 
-    //loaddatephone - загружает БД из текстового файла phone.txt
-    //производит проверку на наличие файла
+    //loaddatephone - загружает БД
     public static void loaddatephone() throws IOException {
-        File file = new File("phone.txt");
+        File file = new File("book.txt");
         if (file.exists()){
-            BufferedReader reader = new BufferedReader(new FileReader(new File("phone.txt")));
+            BufferedReader reader = new BufferedReader(new FileReader(new File("book.txt")));
             String act;
             while ((act=reader.readLine())!=null) {
                 String dat = " ";
@@ -95,12 +94,14 @@ public class hw_1 {
                 datephone[1]=dat;
                 datephone[2]=dat;
                 datephone[3]=dat;
+                datephone[4]=dat;
+                datephone[5]=dat;
             }
             reader.close();
         }
     }
     
-    //Print - выводит на екран все записи БД
+    //Print - выводит на екран все записи
     public static void Printbook(){
         System.out.println("Cправочник всех введённых данных: ");
         for (int i = 0; i < datephone.length; i++) {
@@ -108,21 +109,13 @@ public class hw_1 {
         }
     }
 
-    //adddatephone - добавляет запись по заданным номеру телефона и фамилии
-    private static void adddatephone(String name, String birthdate, String phone, String pol) {
-        datephone[0]=name;
-        datephone[1]=birthdate;
-        datephone[2]=phone;
-        datephone[3]=pol;
-    }
-
-
-    //savedatephone - сохраняет БД в текстовом файле phone.txt
-    private static void savedatephone() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(new File("phone.txt")));
-        for(String value : datephone){
-            writer.write(value);
-        }
-        writer.close();
+    //adddatephone - добавляет запись
+    private static void adddatephone(String first_name, String second_name, String Third_name, String birthdate, String phone, String pol) {
+        datephone[0]=first_name;
+        datephone[1]=second_name;
+        datephone[2]=Third_name;
+        datephone[3]=birthdate;
+        datephone[4]=phone;
+        datephone[5]=pol;
     }
 }
